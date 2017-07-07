@@ -24,6 +24,7 @@ An empty controller:
 
     rails g controller users
 
+Creates:
 
     class Users < ApplicationController
 
@@ -34,7 +35,8 @@ A controller with prepopulated actions:
 
     rails g controller users new create show
 
- 
+Creates:
+
     class Users < ApplicationController
 
       def new
@@ -72,7 +74,8 @@ A controller with actions and authentication:
 
     rails g controller users new create show --authenticate admin
     
- 
+Creates:
+
     class Users < ApplicationController
 
       before_action :authenticate_admin!
@@ -115,6 +118,8 @@ A controller with a namespace:
 
     rails g controller admins/users new create show --authenticate admin
 
+Creates:
+
     class Admins::Users < Admins::BaseControler
 
       before_action :authenticate_admin!
@@ -136,8 +141,6 @@ A controller with a namespace:
       def show
         @user = users_scope.find(params[:id])
       end
-
-
 
 
       private
