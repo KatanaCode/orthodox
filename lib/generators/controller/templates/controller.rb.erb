@@ -1,0 +1,74 @@
+class <%= class_name %> < <%= parent_class_name %>
+
+  <%- if authenticate_actor? -%>
+  before_action :authenticate_<%= authenticate_actor %>!
+  <%- end -%>
+
+  <%- if actions.include?('index') -%>
+  def index
+    @<%= plural_name %> = <%= plural_name %>_scope
+  end
+  <%- end -%>
+
+  <%- if actions.include?('new') -%>
+  def new
+    @<%= singular_name %> = <%= plural_name %>_scope.new
+  end
+  <%- end -%>
+
+  <%- if actions.include?('create') -%>
+  def create
+    @<%= singular_name %> = <%= plural_name %>_scope.new(<%= singular_name %>_params)
+    if @<%= singular_name %>.save
+      redirect_to(<%= singular_name %>_url(@<%= singular_name %>), notice: "<%= create_flash_message %>")
+    else
+      render :new
+    end
+  end
+  <%- end -%>
+
+  <%- if actions.include?('show') -%>
+  def show
+    @<%= singular_name %> = <%= plural_name %>_scope.find(params[:id])
+  end
+  <%- end -%>
+
+  <%- if actions.include?('edit') -%>
+  def edit
+    @<%= singular_name %> = <%= plural_name %>_scope.find(params[:id])
+  end
+  <%- end -%>
+
+  <%- if actions.include?('update') -%>
+  def update
+    @<%= singular_name %> = <%= plural_name %>_scope.find(params[:id])
+    if @<%= singular_name %>.update(<%= singular_name %>_params)
+      redirect_to(<%= singular_name %>_url(@<%= singular_name %>), notice: "<%= update_flash_message %>")
+    else
+      render :edit
+    end
+  end
+  <%- end -%>
+
+  <%- if actions.include?('destroy') -%>
+  def destroy
+    @<%= singular_name %> = <%= plural_name %>_scope.find(params[:id])
+    @<%= singular_name %>.destroy
+    redirect_to(<%= singular_name %>_url(@<%= singular_name %>), notice: "<%= destroy_flash_message %>")
+  end
+  <%- end -%>
+
+  <%- if actions.any? -%>
+  private
+
+
+  def <%= plural_name %>_scope
+    <%= singular_name.classify %>.all
+  end
+
+  def <%= singular_name %>_params
+    params.require(:<%= singular_name %>).permit()
+  end
+  <%- end -%>
+
+end
