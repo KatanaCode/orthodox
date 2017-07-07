@@ -7,7 +7,7 @@ Replacement Rails generators for Katana apps.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'orthodox', github: "katana/orthodox"
+gem 'orthodox', github: "katanacode/orthodox"
 ```
 
 And then execute:
