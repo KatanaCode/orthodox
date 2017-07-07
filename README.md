@@ -24,18 +24,131 @@ An empty controller:
 
     rails g controller users
 
+    class Users < ApplicationController
+
+    end
+
+
 A controller with prepopulated actions:
 
     rails g controller users new create show
+
+    class Users < ApplicationController
+
+      def new
+        @user = users_scope.new
+      end
+
+      def create
+        @user = users_scope.new(user_params)
+        if @user.save
+          redirect_to(user_url(@user), notice: "Successfully created user")
+        else
+          render :new
+        end
+      end
+
+      def show
+        @user = users_scope.find(params[:id])
+      end
+
+
+      private
+
+
+      def users_scope
+        User.all
+      end
+
+      def user_params
+        params.require(:user).permit()
+      end
+
+    end
 
 A controller with actions and authentication:
 
     rails g controller users new create show --authenticate admin
 
+    class Users < ApplicationController
+
+      before_action :authenticate_admin!
+
+
+      def new
+        @user = users_scope.new
+      end
+
+      def create
+        @user = users_scope.new(user_params)
+        if @user.save
+          redirect_to(user_url(@user), notice: "Successfully created user")
+        else
+          render :new
+        end
+      end
+
+      def show
+        @user = users_scope.find(params[:id])
+      end
+
+
+
+
+      private
+
+
+      def users_scope
+        User.all
+      end
+
+      def user_params
+        params.require(:user).permit()
+      end
+
+    end
+
 A controller with a namespace:
 
     rails g controller admins/users new create show --authenticate admin
 
+    class Admins::Users < Admins::BaseControler
+
+      before_action :authenticate_admin!
+
+
+      def new
+        @user = users_scope.new
+      end
+
+      def create
+        @user = users_scope.new(user_params)
+        if @user.save
+          redirect_to(user_url(@user), notice: "Successfully created user")
+        else
+          render :new
+        end
+      end
+
+      def show
+        @user = users_scope.find(params[:id])
+      end
+
+
+
+
+      private
+
+
+      def users_scope
+        User.all
+      end
+
+      def user_params
+        params.require(:user).permit()
+      end
+
+    end
 
 ## Development
 
