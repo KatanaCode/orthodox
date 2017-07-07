@@ -7,7 +7,7 @@ Replacement Rails generators for Katana apps.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'orthodox', github: "katana/orthodox"
+gem 'orthodox', github: "katanacode/orthodox"
 ```
 
 And then execute:
@@ -20,18 +20,22 @@ Or install it yourself as:
 
 ## Usage
 
-An empty controller:
+### An empty controller:
 
     rails g controller users
+
+Creates:
 
     class Users < ApplicationController
 
     end
 
 
-A controller with prepopulated actions:
+### A controller with prepopulated actions:
 
     rails g controller users new create show
+
+Creates:
 
     class Users < ApplicationController
 
@@ -66,9 +70,11 @@ A controller with prepopulated actions:
 
     end
 
-A controller with actions and authentication:
+### A controller with actions and authentication:
 
     rails g controller users new create show --authenticate admin
+    
+Creates:
 
     class Users < ApplicationController
 
@@ -108,9 +114,11 @@ A controller with actions and authentication:
 
     end
 
-A controller with a namespace:
+### A controller with a namespace:
 
     rails g controller admins/users new create show --authenticate admin
+
+Creates:
 
     class Admins::Users < Admins::BaseControler
 
@@ -133,8 +141,6 @@ A controller with a namespace:
       def show
         @user = users_scope.find(params[:id])
       end
-
-
 
 
       private
