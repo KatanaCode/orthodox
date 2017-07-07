@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-An empty controller:
+### An empty controller:
 
     rails g controller users
 
@@ -31,7 +31,7 @@ Creates:
     end
 
 
-A controller with prepopulated actions:
+### A controller with prepopulated actions:
 
     rails g controller users new create show
 
@@ -70,7 +70,7 @@ Creates:
 
     end
 
-A controller with actions and authentication:
+### A controller with actions and authentication:
 
     rails g controller users new create show --authenticate admin
     
@@ -114,7 +114,7 @@ Creates:
 
     end
 
-A controller with a namespace:
+### A controller with a namespace:
 
     rails g controller admins/users new create show --authenticate admin
 
