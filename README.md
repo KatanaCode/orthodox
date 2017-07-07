@@ -24,6 +24,7 @@ An empty controller:
 
     rails g controller users
 
+
     class Users < ApplicationController
 
     end
@@ -33,6 +34,7 @@ A controller with prepopulated actions:
 
     rails g controller users new create show
 
+ 
     class Users < ApplicationController
 
       def new
@@ -69,7 +71,8 @@ A controller with prepopulated actions:
 A controller with actions and authentication:
 
     rails g controller users new create show --authenticate admin
-
+    
+ 
     class Users < ApplicationController
 
       before_action :authenticate_admin!
