@@ -66,7 +66,7 @@ class ControllerGenerator < Rails::Generators::NamedBase
   end
 
   def parent_class_name
-    namespace.blank? ? 'ApplicationController' : namespace  + "::BaseControler"
+    namespace.blank? ? 'ApplicationController' : namespace  + "::BaseController"
   end
 
   def authenticate_actor?
