@@ -1,0 +1,11 @@
+Description:
+    Replaces the Rails default controller generator with a cleaner, controller. Includes non-template actions, authentication, and SLIM templates
+
+Example:
+    rails generate controller users new create show index --authenticate admin
+
+    This will create:
+      app/controllers/users_controller.rb
+      app/views/users/new.html.slim
+      app/views/users/show.html.slim
+      app/views/users/index.html.slim

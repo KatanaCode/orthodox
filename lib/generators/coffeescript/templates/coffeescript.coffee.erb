@@ -1,0 +1,14 @@
+<%= function_name %> = (->
+
+  init = ->
+    # Write your code here...
+
+  <%- functions.each do |functionName| %>
+  <%= functionName %> = ->
+    # Write your function here...
+  <%- end -%>
+
+  return { init }
+)()
+
+$(document).on "turbolinks:load", <%= function_name %>.init
