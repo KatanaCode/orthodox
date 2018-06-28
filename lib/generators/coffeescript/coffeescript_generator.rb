@@ -3,9 +3,11 @@ class CoffeescriptGenerator < Rails::Generators::NamedBase
 
   source_root File.expand_path('../templates', __FILE__)
 
-  desc "This generator creates a coffee script file at app/assets/javascripts/partials"
+  desc "This generator creates a coffee script file at"\
+        " app/assets/javascripts/partials"
 
-  argument :functions, type: :array, default: [], banner: "functionOne functionTwo"
+  argument :functions, type: :array, default: [],
+                                     banner: "functionOne functionTwo"
 
   attr_reader :namespace
 
@@ -27,11 +29,8 @@ class CoffeescriptGenerator < Rails::Generators::NamedBase
   end
 
   def file_path
-    Rails.root.join("app/assets/javascripts/partials", partial_file_name + ".coffee")
-  end
-
-  def template_file_path(temp_name)
-    Rails.root.join('app', 'views', namespace_path + file_name, temp_name + ".html.slim")
+    Rails.root.join("app/assets/javascripts/packs",
+                    partial_file_name + ".coffee")
   end
 
   def namespace_path
