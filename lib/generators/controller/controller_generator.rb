@@ -1,6 +1,4 @@
 require 'rails/generators'
-
-
 class ControllerGenerator < Rails::Generators::NamedBase
 
   check_class_collision suffix: "Controller"
@@ -17,7 +15,6 @@ class ControllerGenerator < Rails::Generators::NamedBase
 
   attr_reader :namespace
 
-
   def copy_template_file
     @namespace = class_name.split("::")
     @namespace.pop
@@ -28,9 +25,7 @@ class ControllerGenerator < Rails::Generators::NamedBase
     end
   end
 
-
   private
-
 
   def create_flash_message
     "Successfully created #{singular_name}"
@@ -44,13 +39,14 @@ class ControllerGenerator < Rails::Generators::NamedBase
     "Successfully destroyed #{singular_name}"
   end
 
-
   def file_path
-    Rails.root.join('app', 'controllers', namespace_path + file_name + "_controller.rb")
+    Rails.root.join('app', 'controllers',
+                    namespace_path + file_name + "_controller.rb")
   end
 
   def template_file_path(temp_name)
-    Rails.root.join('app', 'views', namespace_path + file_name, temp_name + ".html.slim")
+    Rails.root.join('app', 'views', namespace_path + file_name,
+                    temp_name + ".html.slim")
   end
 
   def namespace_path
@@ -76,5 +72,4 @@ class ControllerGenerator < Rails::Generators::NamedBase
   def authenticate_actor
     options['authenticate']
   end
-
 end
