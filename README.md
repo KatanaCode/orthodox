@@ -20,6 +20,56 @@ Or install it yourself as:
 
 ## Usage
 
+### A Coffeescript file:
+
+    rails g coffeescript users
+
+Creates
+
+    window.users = do ->
+
+      init = ->
+
+      return { init }
+
+### A Coffeescript file with functions:
+
+    rails g coffeescript users show_all
+
+Creates
+
+    window.users = do ->
+
+      init = ->
+
+      showAll = ->
+
+      return { init }
+
+### A Sass file:
+
+    rails g sass users
+
+Creates
+
+    .user
+      // Define sass here
+
+### A Sass file with BEM elements:
+
+    rails g sass users name avatar
+
+Creates
+
+    .user
+      // Define sass here
+
+    .user-name
+      // Define sass here
+
+    .user-avatar
+      // Define sass here
+
 ### An empty controller:
 
     rails g controller users
@@ -73,7 +123,7 @@ Creates:
 ### A controller with actions and authentication:
 
     rails g controller users new create show --authenticate admin
-    
+
 Creates:
 
     class Users < ApplicationController
