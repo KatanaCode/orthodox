@@ -118,25 +118,25 @@ class AuthenticationGenerator < Rails::Generators::NamedBase
   
   def create_specs
     return if options[:skip_tests]
-    template "specs/system/authentication_spec.rb.erb", 
+    template "spec/system/authentication_spec.rb.erb", 
              "spec/system/#{plural_name}/authentication_spec.rb" 
 
-    template "specs/system/password_resets_spec.rb.erb", 
+    template "spec/system/password_resets_spec.rb.erb", 
              "spec/system/#{plural_name}/password_resets_spec.rb" 
              
-    template "specs/models/session_spec.rb.erb", 
+    template "spec/models/session_spec.rb.erb", 
             "spec/models/#{singular_name}_session_spec.rb" 
     
-    copy_file "specs/models/password_reset_token_spec.rb", 
+    copy_file "spec/models/password_reset_token_spec.rb", 
               "spec/models/password_reset_token_spec.rb"
     
     if options[:two_factor]
-      copy_file "specs/support/authentication_helpers.rb", 
+      copy_file "spec/support/authentication_helpers.rb", 
                 "spec/support/authentication_helpers.rb"
-      copy_file "specs/models/tfa_session_spec.rb", "spec/models/tfa_session_spec.rb"
-      copy_file "specs/models/otp_credential_spec.rb", 
+      copy_file "spec/models/tfa_session_spec.rb", "spec/models/tfa_session_spec.rb"
+      copy_file "spec/models/otp_credential_spec.rb", 
                 "spec/models/otp_credential_spec.rb"      
-      template "specs/system/tfa_authentication_spec.rb.erb", 
+      template "spec/system/tfa_authentication_spec.rb.erb", 
                "spec/system/#{plural_name}/tfa_authentication_spec.rb" 
       
     end
