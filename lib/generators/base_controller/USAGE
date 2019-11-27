@@ -1,0 +1,8 @@
+Description:
+    Create a base controller for a namespace
+    
+Example:
+    rails generate base_controller Member
+
+    This will create:
+        app/controllers/members/base_controller.rb

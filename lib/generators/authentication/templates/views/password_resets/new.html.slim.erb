@@ -1,0 +1,12 @@
+- title "Request a password reset"
+
+h1 = title
+
+= form_tag(<%= plural_name %>_password_resets_path, class: "form") do |f|
+
+  .form-group
+    = label(:<%= singular_name %>, :email, "Email address")
+    = email_field(:<%= singular_name %>, :email, class: "form-control")
+  
+  = submit_tag("Send me a link", class: "btn btn-primary")
+    

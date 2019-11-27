@@ -1,0 +1,14 @@
+Description:
+    Adds boilerplate controllers, models, and views for authenticating a model.
+
+Example:
+    rails generate authentication Member
+
+    This will create:
+        app/models/concerns/authenticateable.rb
+        app/controllers/concerns/authentication.rb
+        app/controllers/members/sessions_controller.rb
+        app/models/member_session.rb
+        app/views/members/sessions/new.html.slim
+        spec/system/members/authentication_spec.rb
+        spec/models/member_session_spec.rb

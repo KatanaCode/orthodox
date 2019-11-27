@@ -1,0 +1,26 @@
+- title "Two-factor authentication"
+
+= form_for(@tfa_session, url: <%= plural_name %>_tfa_session_path) do |f|
+  
+  ul
+    - @tfa_session.errors.full_messages.each do |error_message|
+      li = error_message
+    
+  .form-group.js-tfa-field-group
+    = f.label(:otp, "Enter your one-time password")
+    = f.text_field(:otp, class: "form-control", autofocus: true, pattern: "[0-9]{3,6}")
+
+  .form-group.js-tfa-field-group.d-none
+    = f.label(:recovery_code, "Use a recovery code")
+    = f.text_field(:recovery_code, class: "form-control", pattern: "[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}")
+    
+  div
+    = link_to("Use a recovery code instead", "#",
+              class: "js-tfa-link js-tfa-link--recovery-code")
+                
+    = link_to("Use one-time password instead", "#",
+              class: "js-tfa-link js-tfa-link--otp d-none")
+                
+  div
+    = f.submit("Submit code")
+    
