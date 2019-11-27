@@ -1,0 +1,9 @@
+- title "Your two-factor authentication"
+
+h1 Your Two-Factor Authentication
+
+= svg_url_for_otp_credential(current_<%= singular_name %>.otp_credential)
+
+pre
+  code.code
+    = current_<%= singular_name %>.otp_credential.recovery_codes.join("\n")

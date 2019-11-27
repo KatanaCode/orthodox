@@ -1,0 +1,16 @@
+- title "Set a new password"
+
+h1 = title
+
+= form_tag(<%= plural_name %>_password_reset_path(token: params[:token]), class: "form", method: :patch) do |f|
+
+  .form-group
+    = label(:<%= singular_name %>, :password, "Choose a new password")
+    = password_field(:<%= singular_name %>, :password, class: "form-control")
+
+  .form-group
+    = label(:<%= singular_name %>, :password_confirmation, "Re-enter your password")
+    = password_field(:<%= singular_name %>, :password_confirmation, class: "form-control")
+  
+  = submit_tag("Save changes", class: "btn btn-primary")
+    

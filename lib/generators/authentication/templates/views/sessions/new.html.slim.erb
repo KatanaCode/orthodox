@@ -1,0 +1,21 @@
+- title "Sign in"
+
+= form_for(@<%= singular_name %>_session, url: <%= plural_name %>_session_path) do |f|
+  
+  ul
+   - @<%= singular_name %>_session.errors.full_messages.each do |error_message|
+     li = error_message
+      
+  .form-group
+    = f.label(:email, "Email")
+    = f.email_field(:email, class: "form-control")
+
+  .form-group
+    = f.label(:password, "Password")
+    = f.password_field(:password, class: "form-control")
+    
+  div
+    = f.submit("Sign in")
+    
+  div
+    = link_to("Forgot password?", new_<%= plural_name %>_password_reset_path)
