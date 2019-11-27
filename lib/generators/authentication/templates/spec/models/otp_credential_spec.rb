@@ -46,21 +46,26 @@ RSpec.describe OtpCredential, type: :model do
   end
   
   describe "#url" do
-    
-    let(:member) { build_stubbed(:member) }
-    
+        
     let(:otp_credential) do
-      OtpCredential.create(authable: member)
+      record = build(:otp_credential, authable_type: "User", authable_id: 1)
+      record.save(validate: false) 
+      record
     end
     
     subject { URI(otp_credential.url) }
+      
+    before do
+      test_user = instance_double("TestUser", email: "user-email@example.com")
+      allow(otp_credential).to receive(:authable).and_return(test_user)
+    end
     
     it "contains the otpauth scheme" do
       expect(subject.scheme).to eql("otpauth")
     end
     
     it "contains the autheticateable's email" do
-      expect(subject.to_s).to include(member.email)
+      expect(subject.to_s).to include("user-email@example.com")
     end
     
     it "contains the application name" do

@@ -96,15 +96,13 @@ module Authentication
       private :"#{model_name}_signed_in?"
       private :"authenticate_#{model_name}"
       
-      <% if options[:two_factor] %>
-      
+      <%- if options[:two_factor] -%>
+      # This is included if the authentication generator is run with --two-factor=true
       if options[:tfa] == true
         include TwoFactorAuthentication 
         define_tfa_methods(model_name)
       end
-      
-      <% end %>
-      
+      <%- end -%>
     end
 
   end

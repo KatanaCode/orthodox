@@ -4,7 +4,7 @@ require "rails_helper"
 # (c) Copyright 2019 Katana Code Ltd. All Rights Reserved. 
 RSpec.describe "<%= plural_class_name %>::Authentication", type: :system do
   
-  let!(:member) { create(:member) }
+  let!(:<%= singular_name %>) { create(:<%= singular_name %>) }
   
   scenario "A <%= singular_name %> signs in successfully" do
     visit new_<%= plural_name %>_session_path

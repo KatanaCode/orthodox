@@ -4,20 +4,20 @@ require "rails_helper"
 # (c) Copyright 2019 Katana Code Ltd. All Rights Reserved.
 RSpec.describe TfaSession, type: :model do
   
-  let!(:member) { create(:member) }
+  let!(:<%= singular_name %>) { create(:<%= singular_name %>) }
   
   before do
-    member.create_otp_credential!
+    <%= singular_name %>.create_otp_credential!
   end
   
   describe "#valid?" do
     
-    subject { TfaSession.new(record: member) }
+    subject { TfaSession.new(record: <%= singular_name %>) }
     
     context "when otp correct" do
         
       before do
-        subject.otp = member.otp_credential.send(:current_otp)
+        subject.otp = <%= singular_name %>.otp_credential.send(:current_otp)
       end
       
       it { is_expected.to be_valid }
@@ -37,7 +37,7 @@ RSpec.describe TfaSession, type: :model do
     context "when recovery code correct" do
       
       before do
-        subject.recovery_code = member.otp_credential.recovery_codes.sample
+        subject.recovery_code = <%= singular_name %>.otp_credential.recovery_codes.sample
       end
       
       it { is_expected.to be_valid }

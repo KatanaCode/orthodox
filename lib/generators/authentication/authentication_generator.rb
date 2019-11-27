@@ -44,6 +44,20 @@ class AuthenticationGenerator < Rails::Generators::NamedBase
       copy_file "javascript/tfa_forms.js", "app/javascript/packs/tfa_forms.js"
     end
   end
+  
+  def create_mailer
+    generate "mailer", "#{class_name}Mailer"
+    inject_into_class "app/mailers/#{singular_name}_mailer.rb", "#{class_name}Mailer", <<~RUBY
+
+    def password_reset_link(#{singular_name})
+      @#{singular_name} = #{singular_name}
+      mail(to: #{singular_name}.email, subject: "Reset your password")
+    end
+    
+    RUBY
+    template "views/mailers/password_reset_link.html.slim.erb",
+             "app/views/#{singular_name}_mailer/password_reset_link.html.slim"
+  end
       
   def create_models
     copy_file "models/password_reset_token.rb", "app/models/password_reset_token.rb"
@@ -89,6 +103,7 @@ class AuthenticationGenerator < Rails::Generators::NamedBase
                                                         "resetable:references{polymorphic}"
     if options[:two_factor]
       generate "migration", "create_otp_credentials \
+                              created_at:datetime \
                               last_used_at:datetime \
                               secret:string{32} \
                               authable:references{polymorphic} \
@@ -118,6 +133,9 @@ class AuthenticationGenerator < Rails::Generators::NamedBase
   
   def create_specs
     return if options[:skip_tests]
+    
+    copy_file "spec/support/factory_bot.rb", "spec/support/factory_bot.rb"
+    
     template "spec/system/authentication_spec.rb.erb", 
              "spec/system/#{plural_name}/authentication_spec.rb" 
 
@@ -133,7 +151,7 @@ class AuthenticationGenerator < Rails::Generators::NamedBase
     if options[:two_factor]
       copy_file "spec/support/authentication_helpers.rb", 
                 "spec/support/authentication_helpers.rb"
-      copy_file "spec/models/tfa_session_spec.rb", "spec/models/tfa_session_spec.rb"
+      template "spec/models/tfa_session_spec.rb.erb", "spec/models/tfa_session_spec.rb"
       copy_file "spec/models/otp_credential_spec.rb", 
                 "spec/models/otp_credential_spec.rb"      
       template "spec/system/tfa_authentication_spec.rb.erb", 
@@ -151,6 +169,8 @@ class AuthenticationGenerator < Rails::Generators::NamedBase
   def ensure_gems
     gem "validates_email_format_of", version: "~> 1.6"
     gem "slim-rails"
+    gem "factory_bot_rails"
+    gem "faker"
     if options[:two_factor]
       gem "rotp", version: "~> 5.1.0"
       gem "rqrcode", require: false
@@ -166,9 +186,7 @@ class AuthenticationGenerator < Rails::Generators::NamedBase
       #{"resource :tfa_session, only: [:new, :create]" if options[:two_factor]}
     
       resource :tfa, only: [:create, :show, :destroy]
-    
-      resource :dashboard, only: [:show], controller: "dashboard"
-    
+        
       resources :password_resets, only: [:new, :create, :edit, :update], param: :token
     
     end

@@ -5,6 +5,10 @@
 # (c) Copyright 2019 Katana Code Ltd. All Rights Reserved. 
 class <%= plural_class_name %>::TfasController < <%= plural_class_name %>::BaseController
   
+  skip_before_action :authenticate_<%= singular_name %>
+  
+  before_action :authenticate_<%= singular_name %>_without_tfa
+  
   ##
   # How long will we show the QRCode and recovery codes before they can no longer be
   # accessed?
