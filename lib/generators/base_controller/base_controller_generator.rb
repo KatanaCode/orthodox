@@ -9,14 +9,14 @@ class BaseControllerGenerator < Rails::Generators::NamedBase
 
   def ensure_file
     template "base_controller.rb.erb", 
-             File.join("app", "controllers", plural_file_name, "base_controller.rb")
+             File.join("app", "controllers", file_name, "base_controller.rb")
   end
   
   private
   
   
   def namespace_module
-    file_name.to_s.split("/").first.classify.pluralize
+    file_name.camelize
   end
   
 end
