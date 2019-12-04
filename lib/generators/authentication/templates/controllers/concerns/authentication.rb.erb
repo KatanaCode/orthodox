@@ -8,7 +8,7 @@ module Authentication
   
   extend ActiveSupport::Concern
   
-  private
+  protected
   
   # Sign in a given record as a given type
   #
@@ -91,10 +91,10 @@ module Authentication
       helper_method :"current_#{model_name}?"
       helper_method :"#{model_name}_signed_in?"
       
-      private :"current_#{model_name}"
-      private :"current_#{model_name}?"
-      private :"#{model_name}_signed_in?"
-      private :"authenticate_#{model_name}"
+      protected :"current_#{model_name}"
+      protected :"current_#{model_name}?"
+      protected :"#{model_name}_signed_in?"
+      protected :"authenticate_#{model_name}"
       
       <%- if options[:two_factor] -%>
       # This is included if the authentication generator is run with --two-factor=true

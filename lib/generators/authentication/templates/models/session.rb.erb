@@ -65,7 +65,7 @@ class <%= class_name %>Session
   def password_matches
     return unless <%= singular_name %>
     unless <%= singular_name %>.authenticate(password)
-      errors.add(:password, INVALID_CREDENTIALS)
+      errors.add(:base, INVALID_CREDENTIALS)
     end
   end
   
