@@ -9,6 +9,9 @@ class AuthenticationGenerator < Rails::Generators::NamedBase
   
   class_option :two_factor, type: :boolean, default: false
   
+  class_option :js, type: :boolean, default: false
+  
+  
   def create_controllers
     generate "base_controller", class_name
     template "controllers/sessions_controller.rb.erb", 
@@ -40,7 +43,7 @@ class AuthenticationGenerator < Rails::Generators::NamedBase
   end
 
   def ensure_js
-    if options[:two_factor]
+    if options[:two_factor] && options[:js]
       copy_file "javascript/tfa_forms.js", "app/javascript/packs/tfa_forms.js"
     end
   end
