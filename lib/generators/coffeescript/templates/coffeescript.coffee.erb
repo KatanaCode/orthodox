@@ -1,15 +1,4 @@
-window.<%= function_name %> = do ->
+init = ->
+  # Write your code here...
 
-  init = ->
-    # Write your code here...
-
-  <%- functions.each do |functionName| %>
-  <%= functionName.camelize(:lower) %> = ->
-    # Write your function here...
-  <%- end -%>
-
-  # Add any functions you'd like to make public here:
-  return { init }
-
-# Optionally: Call init on jQuery load
-# jQuery <%= function_name %>.init
+jQuery(init)
