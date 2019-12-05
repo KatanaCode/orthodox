@@ -3,20 +3,20 @@ class <%= class_name %>Controller < <%= parent_class_name %>
 
   <%- if authenticate_actor? -%>
   before_action :authenticate_<%= authenticate_actor %>!
+  
   <%- end -%>
-
   <%- if actions.include?('index') -%>
   def index
     @<%= plural_name %> = <%= plural_name %>_scope
   end
-  <%- end -%>
 
+  <%- end -%>
   <%- if actions.include?('new') -%>
   def new
     @<%= singular_name %> = <%= plural_name %>_scope.new
   end
-  <%- end -%>
 
+  <%- end -%>
   <%- if actions.include?('create') -%>
   def create
     @<%= singular_name %> = <%= plural_name %>_scope.new(<%= singular_name %>_params)
@@ -26,20 +26,20 @@ class <%= class_name %>Controller < <%= parent_class_name %>
       render :new
     end
   end
-  <%- end -%>
 
+  <%- end -%>
   <%- if actions.include?('show') -%>
   def show
     @<%= singular_name %> = <%= plural_name %>_scope.find(params[:id])
   end
-  <%- end -%>
 
+  <%- end -%>
   <%- if actions.include?('edit') -%>
   def edit
     @<%= singular_name %> = <%= plural_name %>_scope.find(params[:id])
   end
-  <%- end -%>
 
+  <%- end -%>
   <%- if actions.include?('update') -%>
   def update
     @<%= singular_name %> = <%= plural_name %>_scope.find(params[:id])
@@ -49,16 +49,16 @@ class <%= class_name %>Controller < <%= parent_class_name %>
       render :edit
     end
   end
-  <%- end -%>
 
+  <%- end -%>
   <%- if actions.include?('destroy') -%>
   def destroy
     @<%= singular_name %> = <%= plural_name %>_scope.find(params[:id])
     @<%= singular_name %>.destroy
-    redirect_to(<%= singular_name %>_url(@<%= singular_name %>), notice: "<%= destroy_flash_message %>")
+    redirect_to(<%= plural_name %>_url, notice: "<%= destroy_flash_message %>")
   end
-  <%- end -%>
 
+  <%- end -%>
   <%- if actions.any? -%>
   private
 
@@ -67,9 +67,12 @@ class <%= class_name %>Controller < <%= parent_class_name %>
     <%= singular_name.classify %>.all
   end
 
+  <% end %>
+  <%- if actions.include?('create') || actions.include?('update') -%>
+
   def <%= singular_name %>_params
     params.require(:<%= singular_name %>).permit()
   end
-  <%- end -%>
 
+  <%- end -%>
 end
