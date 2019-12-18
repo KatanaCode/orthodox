@@ -82,10 +82,11 @@ module Authentication
       # Returns Boolean
       define_method(:"current_#{model_name}?") { send(:"current_#{model_name}").present? }
       
-      alias_method :"#{model_name}_signed_in?", :"current_#{model_name}?"
+      define_method(:"#{model_name}_signed_in?") { send(:"current_#{model_name}?") } 
       
-      alias_method :"#{model_name}_failed_authentication_url", 
-                   :"new_#{model_name.to_s.pluralize}_session_url"
+      define_method(:"#{model_name}_failed_authentication_url") do
+        send(:"new_#{model_name.to_s.pluralize}_session_url")
+      end
       
       helper_method :"current_#{model_name}"
       helper_method :"current_#{model_name}?"
