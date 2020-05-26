@@ -1,4 +1,4 @@
-# frozen_string_literal
+# frozen_string_literal: true
 #
 # Model concern to provide shared behaviour for two-factor auth (one-time password)
 #

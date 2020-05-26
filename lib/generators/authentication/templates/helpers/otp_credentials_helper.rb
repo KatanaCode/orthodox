@@ -1,4 +1,4 @@
-# frozen_string_literal
+# frozen_string_literal: true
 
 # Helper for one-time-password authentication methods
 #
