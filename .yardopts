@@ -1,5 +1,6 @@
 --plugin tomdoc
 --private
+--output-dir=docs
 --hide-void-return
 --title "Orthodox"
 --markup=markdown
