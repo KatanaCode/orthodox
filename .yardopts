@@ -1,0 +1,6 @@
+--plugin tomdoc
+--private
+--hide-void-return
+--title "Orthodox"
+--markup=markdown
+--markup-provider=redcarpet
